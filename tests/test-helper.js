@@ -1,5 +1,5 @@
-import Application from 'decide-frontend/app';
-import config from 'decide-frontend/config/environment';
+import Application from 'frontend-decide/app';
+import config from 'frontend-decide/config/environment';
 import * as QUnit from 'qunit';
 import { setApplication } from '@ember/test-helpers';
 import { setup } from 'qunit-dom';

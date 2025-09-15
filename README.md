@@ -1,4 +1,8 @@
-# decide-frontend
+# frontend-decide
+
+> [!Warning]
+> This is a very early stage application, it is absolutely not production ready yet and it mostly there for quickly testing things for now
+> DO NOT under any circumstance look at any code here as production worthy code.
 
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
@@ -15,7 +19,7 @@ You will need the following things properly installed on your computer.
 ## Installation
 
 - `git clone <repository-url>` this repository
-- `cd decide-frontend`
+- `cd frontend-decide`
 - `npm install`
 
 ## Running / Development
