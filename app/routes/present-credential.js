@@ -1,16 +1,20 @@
 import Route from '@ember/routing/route';
+import { service } from '@ember/service';
 
 let interval = null;
 export default class PresentCredentialRoute extends Route {
+  @service
+  store;
+
   async model() {
     const response = await fetch(
       `/vc-issuer/build-authorization-request-uri?redirectUri=${window.location.origin}/present-credential-callback`,
     );
     const { authorizationRequestUri } = await response.json();
 
-    const statusObject = {
+    const statusObject = this.store.createRecord('credential-status', {
       status: 'pending',
-    };
+    });
 
     interval = setInterval(async () => {
       // simple polling approach for demo purposes
