@@ -1,3 +1,19 @@
 {{page-title "DecideFrontend"}}
-
-{{outlet}}
+<AuApp class="{{if this.showEnvironment 'au-c-app--environment'}}">
+  <AuMainHeader
+    @brandLink={{unless
+      this.session.isAuthenticated
+      "https://www.vlaanderen.be/nl"
+    }}
+    @homeRoute="index"
+    @appTitle={{this.appTitle}}
+  />
+  <AuMainContainer as |main|>
+    <main.content>
+      <AuBodyContainer class="au-u-padding">
+        {{outlet}}
+      </AuBodyContainer>
+    </main.content>
+  </AuMainContainer>
+</AuApp>
+<AuToaster />

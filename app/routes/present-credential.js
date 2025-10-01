@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 
+let interval = null;
 export default class PresentCredentialRoute extends Route {
   async model() {
     const response = await fetch(
@@ -7,6 +8,26 @@ export default class PresentCredentialRoute extends Route {
     );
     const { authorizationRequestUri } = await response.json();
 
-    return { authorizationRequestUri };
+    const statusObject = {
+      status: 'pending',
+    };
+
+    interval = setInterval(async () => {
+      // simple polling approach for demo purposes
+      const response = await fetch('/vc-issuer/authorization-request-status');
+      const { status } = await response.json();
+      statusObject.status = status;
+      if (['pending', 'received'].indexOf(statusObject.status) === -1) {
+        clearInterval(interval);
+      }
+    }, 3000);
+
+    return { authorizationRequestUri, statusObject };
+  }
+
+  deactivate() {
+    if (interval) {
+      clearInterval(interval);
+    }
   }
 }
