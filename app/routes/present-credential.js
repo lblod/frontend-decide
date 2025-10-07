@@ -8,7 +8,7 @@ export default class PresentCredentialRoute extends Route {
 
   async model() {
     const response = await fetch(
-      `/vc-issuer/build-authorization-request-uri?redirectUri=${window.location.origin}/present-credential-callback`,
+      `/vc-verifier/build-authorization-request-uri?redirectUri=${window.location.origin}/present-credential-callback`,
     );
     const { authorizationRequestUri } = await response.json();
 
@@ -18,7 +18,7 @@ export default class PresentCredentialRoute extends Route {
 
     interval = setInterval(async () => {
       // simple polling approach for demo purposes
-      const response = await fetch('/vc-issuer/authorization-request-status');
+      const response = await fetch('/vc-verifier/authorization-request-status');
       const { status } = await response.json();
       statusObject.status = status;
       if (['pending', 'received'].indexOf(statusObject.status) === -1) {
