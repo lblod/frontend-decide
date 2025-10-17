@@ -1,0 +1,69 @@
+<table>
+  <caption>Dataset</caption>
+  <tbody>
+    <tr>
+      <td>Title</td>
+      <td>{{@dataset.title}}</td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td>{{@dataset.description}}</td>
+    </tr>
+    <tr>
+      <td>Issued</td>
+      <td>{{@dataset.issued}}</td>
+    </tr>
+    <tr>
+      <td>Modified</td>
+      <td>{{@dataset.modified}}</td>
+    </tr>
+    <tr>
+      <td>Keywords</td>
+      <td>
+        <ul>
+          {{#each @dataset.keyword as |kw|}}
+            <li>{{kw}}</li>
+          {{/each}}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>Language</td>
+      <td>{{@dataset.language}}</td>
+    </tr>
+    <tr>
+      <td>Contact point</td>
+      <td>{{@dataset.contactPoint}}</td>
+    </tr>
+    <tr>
+      <td>Temporal</td>
+      <td>{{@dataset.temporal}}</td>
+    </tr>
+    <tr>
+      <td>Landing page</td>
+      <td>{{@dataset.landingPage}}</td>
+    </tr>
+    <tr>
+      <td>Publisher</td>
+      <td>{{@dataset.publisher.uri}}</td>
+    </tr>
+    <tr>
+      <td>Themes</td>
+      <tr>
+        <ul>
+          {{#each @dataset.themes as |theme|}}
+            <li>{{theme.uri}}</li>
+          {{/each}}
+        </ul>
+      </tr>
+    </tr>
+    <tr>
+      <td>Distributions</td>
+      <tr>
+        {{#each @dataset.distributions as |dist|}}
+          <Dcat::Distribution @distribution={{dist}} />
+        {{/each}}
+      </tr>
+    </tr>
+  </tbody>
+</table>

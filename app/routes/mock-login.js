@@ -8,6 +8,9 @@ export default class MockLoginRoute extends Route {
   @service session;
 
   queryParams = {
+    gemeente: {
+      refreshModel: true
+    },
     page: {
       refreshModel: true,
     },
@@ -25,7 +28,7 @@ export default class MockLoginRoute extends Route {
     return this.store.query('account', {
       include: 'gebruiker.bestuurseenheden',
       filter: filter,
-      page: { size: 10, number: params.page },
+      page: { size: params.size, number: params.page },
       sort: 'gebruiker.achternaam',
     });
   }
