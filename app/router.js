@@ -12,4 +12,5 @@ Router.map(function () {
   this.route('mock-login');
   this.route('protected');
   this.route('login');
+  this.route('logout');
 });
