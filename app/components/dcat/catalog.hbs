@@ -1,0 +1,61 @@
+<table>
+  <caption>Catalog</caption>
+  <tbody>
+    <tr>
+      <td>Title</td>
+      <td>{{@catalog.title}}</td>
+    </tr>
+    <tr>
+      <td>Description</td>
+      <td>{{@catalog.description}}</td>
+    </tr>
+    <tr>
+      <td>Issued</td>
+      <td>{{@catalog.issued}}</td>
+    </tr>
+    <tr>
+      <td>Modified</td>
+      <td>{{@catalog.modified}}</td>
+    </tr>
+    <tr>
+      <td>Language</td>
+      <td>{{@catalog.language}}</td>
+    </tr>
+    <tr>
+      <td>License</td>
+      <td>{{@catalog.license}}</td>
+    </tr>
+    <tr>
+      <td>Rights</td>
+      <td>{{@catalog.rights}}</td>
+    </tr>
+    <tr>
+      <td>Homepage</td>
+      <td>{{@catalog.homepage}}</td>
+    </tr>
+    <tr>
+      <td>Spatial</td>
+      <td>{{@catalog.spatial}}</td>
+    </tr>
+    <tr>
+      <td>Publisher</td>
+      <td>{{@catalog.publisher.uri}}</td>
+    </tr>
+    <tr>
+      <td>Theme taxonomy</td>
+      <td>{{@catalog.themeTaxonomy.uri}}</td>
+    </tr>
+    <tr>
+      <td>Record</td>
+      <td>{{@catalog.record.uri}}</td>
+    </tr>
+    <tr>
+      <td>Datasets</td>
+      <td>
+        {{#each @catalog.datasets as |dataset|}}
+          <Dcat::Dataset @dataset={{dataset}} />
+        {{/each}}
+      </td>
+    </tr>
+  </tbody>
+</table>

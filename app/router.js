@@ -9,4 +9,9 @@ export default class Router extends EmberRouter {
 Router.map(function () {
   this.route('receive-credential');
   this.route('present-credential');
+  this.route('mock-login');
+  this.route('protected');
+  this.route('login');
+  this.route('logout');
+  this.route('dcat');
 });
