@@ -17,11 +17,11 @@ export default class ApplicationRoute extends Route {
       await this.currentSession.load();
     } catch (error) {
       warn(error, { id: 'current-session-load-failure' });
-      this.router.transitionTo('auth.logout');
+      this.router.transitionTo('logout');
     }
   }
 
   async model() {
-    return {account: this.currentSession.account}
+    return { account: this.currentSession.account };
   }
 }

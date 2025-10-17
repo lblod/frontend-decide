@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
-import { service } from '@ember/service'
+import { service } from '@ember/service';
 
 export default class ApplicationController extends Controller {
-    @service session;
-    @service currentSession;
+  @service session;
 }
