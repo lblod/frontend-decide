@@ -5,6 +5,12 @@ let interval = null;
 export default class PresentCredentialRoute extends Route {
   @service
   store;
+  @service
+  session;
+
+  beforeModel() {
+    this.session.prohibitAuthentication('mock-login');
+  }
 
   async model() {
     const response = await fetch(
@@ -27,6 +33,12 @@ export default class PresentCredentialRoute extends Route {
     }, 3000);
 
     return { authorizationRequestUri, statusObject };
+  }
+
+  afterModel(model) {
+    if (model.statusObject.status === 'received') {
+      this.router.transitionTo('');
+    }
   }
 
   deactivate() {
