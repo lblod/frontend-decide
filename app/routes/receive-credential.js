@@ -5,6 +5,13 @@ let interval = null;
 
 export default class ReceiveCredentialRoute extends Route {
   @service('store') store;
+  @service session;
+  @service router;
+
+  async beforeModel(transition) {
+    this.session.requireAuthentication(transition, 'login');
+  }
+
   async model() {
     const response = await fetch('/vc-issuer/build-credential-offer-uri');
     const { credentialOfferUri, pin } = await response.json();
@@ -20,6 +27,9 @@ export default class ReceiveCredentialRoute extends Route {
       statusObject.status = status;
       if (['pending', 'received'].indexOf(statusObject.status) === -1) {
         clearInterval(interval);
+      }
+      if (statusObject.status === 'issued') {
+        this.router.transitionTo('index');
       }
     }, 3000);
 
