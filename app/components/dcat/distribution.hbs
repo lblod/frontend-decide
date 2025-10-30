@@ -1,6 +1,6 @@
-<table>
-  <caption>Distribution</caption>
-  <tbody>
+<AuTable>
+  <:title>Distribution</:title>
+  <:body>
     <tr>
       <td>Title</td>
       <td>{{@distribution.title}}</td>
@@ -19,19 +19,28 @@
     </tr>
     <tr>
       <td>License</td>
-      <td>{{@distribution.license}}</td>
+      <td><AuLinkExternal
+          @href={{@distribution.license}}
+        >{{@distribution.license}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Rights</td>
-      <td>{{@distribution.rights}}</td>
+      <td><AuLinkExternal
+          @href={{@distribution.rights}}
+        >{{@distribution.rights}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Access URL</td>
-      <td>{{@distribution.accessUrl}}</td>
+      <td><AuLinkExternal
+          @href={{@distribution.accessUrl}}
+        >{{@distribution.accessUrl}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Download URL</td>
-      <td>{{@distribution.downloadUrl}}</td>
+      <td>
+        <AuLinkExternal
+          @href={{@distribution.downloadUrl}}
+        >{{@distribution.downloadUrl}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Byte size</td>
@@ -39,7 +48,20 @@
     </tr>
     <tr>
       <td>Format</td>
-      <td>{{@distribution.format.uri}}</td>
+      <td><AuLinkExternal
+          @href={{@distribution.format.uri}}
+        >{{@distribution.format.uri}}</AuLinkExternal></td>
     </tr>
-  </tbody>
-</table>
+  </:body>
+  <:footer>
+    <tr>
+      <td>Dataset</td>
+      <td><AuLink
+          @route="dcat.datasets.dataset"
+          @model={{@distribution.dataset}}
+          @icon="chevron-up"
+          @skin="secondary"
+        >{{@distribution.dataset.title}}</AuLink></td>
+    </tr>
+  </:footer>
+</AuTable>

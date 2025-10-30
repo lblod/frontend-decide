@@ -13,5 +13,12 @@ Router.map(function () {
   this.route('protected');
   this.route('login');
   this.route('logout');
-  this.route('dcat');
+  this.route('dcat', function() {
+    this.route('distributions.distribution', { path: '/distributions/:distribution_id' });
+    this.route('datasets.dataset', { path: '/datasets/:dataset_id' });
+    this.route('catalogs', function() {
+      this.route('index');
+      this.route('catalog', { path: '/:catalog_id' });
+    });
+  });
 });
