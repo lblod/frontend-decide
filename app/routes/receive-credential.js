@@ -27,6 +27,9 @@ export default class ReceiveCredentialRoute extends Route {
       if (['pending', 'received'].indexOf(statusObject.status) === -1) {
         clearInterval(interval);
       }
+      if (statusObject.status === 'issued') {
+        this.router.transitionTo('index');
+      }
     }, 3000);
 
     return {

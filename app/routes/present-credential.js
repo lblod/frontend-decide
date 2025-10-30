@@ -30,15 +30,12 @@ export default class PresentCredentialRoute extends Route {
       if (['pending', 'received'].indexOf(statusObject.status) === -1) {
         clearInterval(interval);
       }
+      if (statusObject.status === 'accepted') {
+        this.router.transitionTo('index');
+      }
     }, 3000);
 
     return { authorizationRequestUri, statusObject };
-  }
-
-  afterModel(model) {
-    if (model.statusObject.status === 'received') {
-      this.router.transitionTo('');
-    }
   }
 
   deactivate() {
