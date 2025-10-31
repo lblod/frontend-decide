@@ -15,5 +15,5 @@ export default class CatalogModel extends Model {
   @belongsTo('agent', {async: true, inverse: null}) publisher;
   @belongsTo('concept-scheme', {async: true, inverse: 'catalogs'}) themeTaxonomy;
   @belongsTo('catalog-record', {async: true, inverse: 'catalog'}) record;
-  @hasMany('dataset', {async: true, inverse: null}) datasets;
+  @hasMany('dataset', {async: true, inverse: 'catalog'}) datasets;
 }

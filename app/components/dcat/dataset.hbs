@@ -1,6 +1,6 @@
-<table>
-  <caption>Dataset</caption>
-  <tbody>
+<AuTable>
+  <:title>Dataset</:title>
+  <:body>
     <tr>
       <td>Title</td>
       <td>{{@dataset.title}}</td>
@@ -20,50 +20,79 @@
     <tr>
       <td>Keywords</td>
       <td>
-        <ul>
+        <AuList as |Item|>
           {{#each @dataset.keyword as |kw|}}
-            <li>{{kw}}</li>
+            <Item>{{kw}}</Item>
           {{/each}}
-        </ul>
+        </AuList>
       </td>
     </tr>
     <tr>
       <td>Language</td>
-      <td>{{@dataset.language}}</td>
+      <td><AuLinkExternal
+          href={{@dataset.language}}
+        >{{@dataset.language}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Contact point</td>
-      <td>{{@dataset.contactPoint}}</td>
+      <td><AuLinkExternal
+          href={{@dataset.contactPoint}}
+        >{{@dataset.contactPoint}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Temporal</td>
-      <td>{{@dataset.temporal}}</td>
+      <td><AuLinkExternal
+          href={{@dataset.temporal}}
+        >{{@dataset.temporal}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Landing page</td>
-      <td>{{@dataset.landingPage}}</td>
+      <td><AuLinkExternal
+          href={{@dataset.landingPage}}
+        >{{@dataset.landingPage}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Publisher</td>
-      <td>{{@dataset.publisher.uri}}</td>
+      <td><AuLinkExternal
+          href={{@dataset.publisher.uri}}
+        >{{@dataset.publisher.uri}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Themes</td>
-      <tr>
-        <ul>
+      <td>
+        <AuList as |Item|>
           {{#each @dataset.themes as |theme|}}
-            <li>{{theme.uri}}</li>
+            <Item><AuLinkExternal
+                href={{theme.uri}}
+              >{{theme.uri}}</AuLinkExternal></Item>
           {{/each}}
-        </ul>
-      </tr>
+        </AuList>
+      </td>
     </tr>
     <tr>
       <td>Distributions</td>
       <tr>
-        {{#each @dataset.distributions as |dist|}}
-          <Dcat::Distribution @distribution={{dist}} />
-        {{/each}}
+        <AuList as |Item|>
+          {{#each @dataset.distributions as |dist|}}
+            <Item><AuLink
+                @route="dcat.distributions.distribution"
+                @model={{dist}}
+                @icon="file"
+              >{{dist.title}}</AuLink></Item>
+          {{/each}}
+        </AuList>
       </tr>
     </tr>
-  </tbody>
-</table>
+  </:body>
+  <:footer>
+    <tr>
+      <td>Catalog</td>
+      <td><AuLink
+          @route="dcat.catalogs.catalog"
+          @model={{@dataset.catalog}}
+          @icon="chevron-up"
+          @skin="secondary"
+        >{{@dataset.catalog.title}}</AuLink></td>
+    </tr>
+  </:footer>
+</AuTable>

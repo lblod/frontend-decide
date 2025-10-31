@@ -1,6 +1,6 @@
-<table>
-  <caption>Catalog</caption>
-  <tbody>
+<AuTable>
+  <:title>Catalog</:title>
+  <:body>
     <tr>
       <td>Title</td>
       <td>{{@catalog.title}}</td>
@@ -19,43 +19,71 @@
     </tr>
     <tr>
       <td>Language</td>
-      <td>{{@catalog.language}}</td>
+      <td>
+        <AuLinkExternal href={{@catalog.language}}>
+          {{@catalog.language}}
+        </AuLinkExternal>
+      </td>
     </tr>
     <tr>
       <td>License</td>
-      <td>{{@catalog.license}}</td>
+      <td>
+        <AuLinkExternal
+          href={{@catalog.license}}
+        >{{@catalog.license}}</AuLinkExternal>
+      </td>
     </tr>
     <tr>
       <td>Rights</td>
-      <td>{{@catalog.rights}}</td>
+      <td><AuLinkExternal
+          href={{@catalog.rights}}
+        >{{@catalog.rights}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Homepage</td>
-      <td>{{@catalog.homepage}}</td>
+      <td><AuLinkExternal
+          href={{@catalog.homepage}}
+        >{{@catalog.homepage}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Spatial</td>
-      <td>{{@catalog.spatial}}</td>
+      <td><AuLinkExternal
+          href={{@catalog.spatial}}
+        >{{@catalog.spatial}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Publisher</td>
-      <td>{{@catalog.publisher.uri}}</td>
+      <td><AuLinkExternal
+          href={{@catalog.publisher.uri}}
+        >{{@catalog.publisher.uri}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Theme taxonomy</td>
-      <td>{{@catalog.themeTaxonomy.uri}}</td>
+      <td><AuLinkExternal
+          href={{@catalog.themeTaxonomy.uri}}
+        >{{@catalog.themeTaxonomy.uri}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Record</td>
-      <td>{{@catalog.record.uri}}</td>
+      <td><AuLinkExternal
+          href={{@catalog.record.uri}}
+        >{{@catalog.record.uri}}</AuLinkExternal></td>
     </tr>
     <tr>
       <td>Datasets</td>
       <td>
-        {{#each @catalog.datasets as |dataset|}}
-          <Dcat::Dataset @dataset={{dataset}} />
-        {{/each}}
+        <AuList as |Item|>
+          {{#each @catalog.datasets as |dataset|}}
+            <Item>
+              <AuLink
+                @route="dcat.datasets.dataset"
+                @model={{dataset}}
+                @icon="book"
+              >{{dataset.title}}</AuLink>
+            </Item>
+          {{/each}}
+        </AuList>
       </td>
     </tr>
-  </tbody>
-</table>
+  </:body>
+</AuTable>

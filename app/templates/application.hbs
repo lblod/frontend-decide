@@ -10,8 +10,24 @@
   />
   <AuMainContainer as |main|>
     <main.content>
-      <a href="/dcat">dcat</a>
-      <a href="/logout">logout</a>
+      <AuToolbar as |Group|>
+        <Group>
+          <AuButtonGroup>
+            {{#if this.session.isAuthenticated}}
+              <AuLink @route="dcat.catalogs">Catalogs</AuLink>
+            {{else}}
+              <AuLink @route="mock-login">Mock login</AuLink>
+            {{/if}}
+          </AuButtonGroup>
+        </Group>
+        {{#if this.session.isAuthenticated}}
+          <Group>
+            <AuButtonGroup>
+              <AuLink @route="logout" @skin="secondary">Log out</AuLink>
+            </AuButtonGroup>
+          </Group>
+        {{/if}}
+      </AuToolbar>
       <AuBodyContainer class="au-u-padding">
         {{outlet}}
       </AuBodyContainer>
