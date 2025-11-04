@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
-export default class DcatRoute extends Route {
+export default class DcatCatalogsCatalogsRoute extends Route {
   @service session;
   @service store;
 
