@@ -15,8 +15,10 @@
           <AuButtonGroup>
             {{#if this.session.isAuthenticated}}
               <AuLink @route="dcat.catalogs">Catalogs</AuLink>
+              <AuLink @route="receive-credential">Request VC</AuLink>
             {{else}}
               <AuLink @route="mock-login">Mock login</AuLink>
+              <AuLink @route="present-credential">Log in through VC</AuLink>
             {{/if}}
           </AuButtonGroup>
         </Group>
