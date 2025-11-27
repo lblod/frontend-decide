@@ -13,6 +13,7 @@ Router.map(function () {
   this.route('login');
   this.route('logout');
   this.route('dcat', function() {
+    this.route('search');
     this.route('distributions.distribution', { path: '/distributions/:distribution_id' });
     this.route('datasets.dataset', { path: '/datasets/:dataset_id' });
     this.route('catalogs', function() {

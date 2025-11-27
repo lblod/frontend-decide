@@ -5,7 +5,7 @@ import { tracked } from '@glimmer/tracking';
 
 import { task, timeout } from 'ember-concurrency';
 
-export default class DcatIndexController extends Controller {
+export default class DcatSearchController extends Controller {
   @service store;
 
   queryParams = ['keyword', 'page'];

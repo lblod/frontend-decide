@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
-export default class DcatIndexRoute extends Route {
+export default class DcatSearchRoute extends Route {
   @service store;
   @service session;
   max_size = 100;
