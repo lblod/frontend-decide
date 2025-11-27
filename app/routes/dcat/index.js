@@ -4,8 +4,12 @@ import { service } from '@ember/service';
 export default class DcatIndexRoute extends Route {
   @service store;
   @service session;
+  max_size = 100;
 
   queryParams = {
+    size: {
+      refreshModel: true,
+    },
     page: {
       refreshModel: true,
     },
@@ -16,15 +20,18 @@ export default class DcatIndexRoute extends Route {
   }
 
   async model(params) {
-    let filter = { };
+    let filter = {};
     if (params.keyword) {
       filter = params.keyword;
     }
     return this.store.query('dataset', {
       include: 'distributions',
       filter: filter,
-      page: { size: 10, number: params.page },
-      sort: 'title',
+      page: {
+        size: params.size < this.max_size ? params.size : this.max_size,
+        number: params.page,
+      },
+      sort: 'modified',
     });
   }
 }

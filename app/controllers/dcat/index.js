@@ -12,18 +12,22 @@ export default class DcatIndexController extends Controller {
   @tracked model;
   @tracked keyword = '';
   @tracked page = 0;
-  size = 10;
+  @tracked size = 2;
+  max_size = 100;
 
   queryStore = task(async () => {
-    let filter = { };
+    let filter = {};
     if (this.keyword) {
       filter = this.keyword;
     }
     const dataset = await this.store.query('dataset', {
       filter,
-      page: { size: this.size, number: this.page },
-      sort: 'title',
-      include: 'distributions'
+      page: {
+        size: this.size < this.max_size ? this.size : this.max_size,
+        number: this.page,
+      },
+      sort: 'modified',
+      include: 'distributions',
     });
 
     return dataset;

@@ -7,9 +7,9 @@
     <main id="content">
       <div class="au-o-region-large">
         <div class="au-o-layout">
-          <AuHeading @skin="4">Search for datasets</AuHeading>
+          <AuHeading @skin="2">Search for datasets</AuHeading>
           <p class="au-u-margin-top-small au-u-margin-bottom">
-            <input
+            <AuInput
               class="au-c-input au-c-input--block js-js-input-pattern-bound"
               placeholder="Search term(s)"
               value={{this.keyword}}
@@ -33,11 +33,32 @@
                       <p>{{dataset.description}}</p>
                     </c.content>
                     <c.footer>
-                      <AuLink
-                        @skin="button"
-                        @route="dcat.datasets.dataset"
-                        @model={{dataset}}
-                      >Visit dataset</AuLink>
+                      <p>
+                        <AuLink
+                          @skin="button"
+                          @route="dcat.datasets.dataset"
+                          @model={{dataset}}
+                        >View dataset</AuLink>
+                        {{#if dataset.distributions}}
+                          {{! template-lint-disable require-context-role }}
+                          <AuDropdown
+                            @title={{concat
+                              dataset.distributions.length
+                              " distribution"
+                              (if (not-eq dataset.distributions.length 1) "s")
+                            }}
+                            @skin="secondary"
+                          >
+                            {{#each dataset.distributions as |distribution|}}
+                              <AuButton @skin="link" role="menuitem"><AuLink
+                                  @skin="primary"
+                                  @route="dcat.distributions.distribution"
+                                  @model={{distribution}}
+                                >{{distribution.title}}</AuLink></AuButton>
+                            {{/each}}
+                          </AuDropdown>
+                        {{/if}}
+                      </p>
                     </c.footer>
                   </AuCard>
                 </Item>
