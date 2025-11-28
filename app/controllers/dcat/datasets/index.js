@@ -5,20 +5,20 @@ import { tracked } from '@glimmer/tracking';
 
 import { task, timeout } from 'ember-concurrency';
 
-export default class DcatSearchController extends Controller {
+export default class DcatDatasetsController extends Controller {
   @service store;
 
-  queryParams = ['keyword', 'page'];
+  queryParams = ['searchTerm', 'page'];
   @tracked model;
-  @tracked keyword = '';
+  @tracked searchTerm = '';
   @tracked page = 0;
   @tracked size = 2;
   max_size = 100;
 
   queryStore = task(async () => {
     let filter = {};
-    if (this.keyword) {
-      filter = this.keyword;
+    if (this.searchTerm) {
+      filter = this.searchTerm;
     }
     const dataset = await this.store.query('dataset', {
       filter,
@@ -36,7 +36,7 @@ export default class DcatSearchController extends Controller {
   updateSearch = task({ restartable: true }, async (value) => {
     await timeout(500);
     this.page = 0;
-    this.keyword = value;
+    this.searchTerm = value;
     this.model = await this.queryStore.perform();
   });
 }

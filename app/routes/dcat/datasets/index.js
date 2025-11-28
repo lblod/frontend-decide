@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
-export default class DcatSearchRoute extends Route {
+export default class DcatDatasetsRoute extends Route {
   @service store;
   @service session;
   max_size = 100;
@@ -21,8 +21,8 @@ export default class DcatSearchRoute extends Route {
 
   async model(params) {
     let filter = {};
-    if (params.keyword) {
-      filter = params.keyword;
+    if (params.searchTerm) {
+      filter = params.searchTerm;
     }
     return this.store.query('dataset', {
       include: 'distributions',
