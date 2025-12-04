@@ -16,20 +16,19 @@ export default class DcatDatasetsController extends Controller {
   max_size = 100;
 
   queryStore = task(async () => {
-    let filter = {};
-    if (this.searchTerm) {
-      filter = this.searchTerm;
-    }
-    const dataset = await this.store.query('dataset', {
-      filter,
+    const opts = {
       page: {
         size: this.size < this.max_size ? this.size : this.max_size,
         number: this.page,
       },
       sort: 'modified',
       include: 'distributions',
-    });
-
+    };
+    if (this.searchTerm) {
+      opts['filter[:or:]'] = this.searchTerm;
+      opts['filter[:or:][distributions]'] = this.searchTerm;
+    };
+    const dataset = await this.store.query('dataset', opts);
     return dataset;
   });
 

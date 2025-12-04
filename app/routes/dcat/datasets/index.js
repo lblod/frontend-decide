@@ -20,18 +20,18 @@ export default class DcatDatasetsRoute extends Route {
   }
 
   async model(params) {
-    let filter = {};
-    if (params.searchTerm) {
-      filter = params.searchTerm;
-    }
-    return this.store.query('dataset', {
-      include: 'distributions',
-      filter: filter,
+    const opts = {
       page: {
         size: params.size < this.max_size ? params.size : this.max_size,
         number: params.page,
       },
       sort: 'modified',
-    });
+      include: 'distributions',
+    };
+    if (params.searchTerm) {
+      opts['filter[:or:]'] = params.searchTerm;
+      opts['filter[:or:][distributions]'] = params.searchTerm;
+    };
+    return this.store.query('dataset', opts);
   }
 }
