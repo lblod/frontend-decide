@@ -24,6 +24,8 @@ export default class DcatDatasetsController extends Controller {
       sort: 'modified',
       include: 'distributions',
     };
+    // Search for the term in in both dataset and distributions, so that a user can find, for
+    // example, datasets based on one of the available formats. Details in commit message 9ff8c8b.
     if (this.searchTerm) {
       opts['filter[:or:]'] = this.searchTerm;
       opts['filter[:or:][distributions]'] = this.searchTerm;
