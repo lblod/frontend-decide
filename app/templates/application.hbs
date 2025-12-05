@@ -14,6 +14,7 @@
         <Group>
           <AuButtonGroup>
             {{#if this.session.isAuthenticated}}
+              <AuLink @route="dcat.datasets">Datasets</AuLink>
               <AuLink @route="dcat.catalogs">Catalogs</AuLink>
               <AuLink @route="receive-credential">Request VC</AuLink>
             {{else}}
