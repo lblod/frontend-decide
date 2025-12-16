@@ -23,4 +23,9 @@ Router.map(function () {
       this.route('catalog', { path: '/:catalog_id' });
     });
   });
+
+  this.route('annotations', function () {
+    this.route('index', { path: '' });
+    this.route('annotation', { path: '/:annotation_id' });
+  });
 });

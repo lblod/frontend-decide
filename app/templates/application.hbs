@@ -16,6 +16,7 @@
             {{#if this.session.isAuthenticated}}
               <AuLink @route="dcat.datasets">Datasets</AuLink>
               <AuLink @route="dcat.catalogs">Catalogs</AuLink>
+              <AuLink @route="annotations">Annotated data</AuLink>
               <AuLink @route="receive-credential">Request VC</AuLink>
             {{else}}
               <AuLink @route="mock-login">Mock login</AuLink>

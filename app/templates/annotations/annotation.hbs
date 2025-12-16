@@ -1,0 +1,13 @@
+{{page-title "Annotation"}}
+<AuList @direction="vertical" as |Item|>
+  <Item>{{@model.id}}</Item>
+  <Item>{{@model.hasBody.label}}</Item>
+  <Item>
+    <AuLinkExternal href={{@model.hasBody.exactMatch}}>
+      {{@model.hasBody.exactMatch}}
+    </AuLinkExternal>
+  </Item>
+  <Item>{{@model.hasBody.geometry.asWKT}}</Item>
+</AuList>
+
+{{outlet}}
