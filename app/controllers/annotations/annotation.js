@@ -1,45 +1,13 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
 import proj4 from 'proj4';
 
 export default class AnnotationsAnnotationController extends Controller {
-  @tracked geoPoints = this.convertLambertToWgs84();
-
-  // TODO: this logic better fits in the Geometry model
-  @action
-  convertLambertToWgs84() {
+  get convertLambertToWgs84() {
     this.defineProj4();
-    const wkt = this.model.hasBody.get('geometry').get('asWKT');
+    const location = this.model.belongsTo('hasBody').value();
+    const geometry = location?.belongsTo('geometry').value();
 
-    const coordLambert = this.parseWkt(wkt);
-
-    const coordWGS84 = coordLambert.map((pair) =>
-      proj4('EPSG:31370', 'EPSG:4326', pair),
-    );
-
-    return coordWGS84;
-  }
-
-  parseWkt(wkt) {
-    const match = wkt.match(/.*;(?<type>\w+)\s*\((?<coords>[^)]+)\)/);
-
-    if (!['POINT', 'LINESTRING', 'POLYGON'].includes(match.groups.type)) {
-      throw new Error(
-        'Encountered and unsupported WKT geometry: ' + match.groups.type,
-      );
-    }
-
-    return this.parseCoord(match.groups.coords);
-  }
-
-  parseCoord(coordinates) {
-    // 'x1 y1[, x2 y2[, ...]]'
-    // TODO: error when incorrect input coordinates format
-    return coordinates.split(',').map((pair) => {
-      const [x, y] = pair.trim().split(/\s+/);
-      return { x: parseFloat(x), y: parseFloat(y) };
-    });
+    return geometry?.asWGS84();
   }
 
   defineProj4() {

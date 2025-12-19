@@ -8,13 +8,7 @@
     </AuLinkExternal>
   </Item>
   <Item>Lambert/EPSG:31370: {{@model.hasBody.geometry.asWKT}}</Item>
-  <Item>EPSG:4326/WGS84:
-    {{#each this.geoPoints as |point|}}
-      {{point.x}}
-      {{point.y}}
-    {{/each}}</Item>
+  <Item>EPSG:4326/WGS84: {{this.convertLambertToWgs84}}</Item>
 </AuList>
-
-{{map}}
 
 {{outlet}}
