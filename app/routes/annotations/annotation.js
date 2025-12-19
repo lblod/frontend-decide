@@ -13,8 +13,6 @@ export default class AnnotationsAnnotationRoute extends Route {
       },
     );
 
-    // const geometry = await annotation.hasBody.get(geometry);
-
     return annotation;
   }
 }
