@@ -18,10 +18,12 @@ module.exports = function (defaults) {
     },
     babel: {
       plugins: [
-        require.resolve("ember-concurrency/async-arrow-task-transform"),
+        require.resolve('ember-concurrency/async-arrow-task-transform'),
       ],
-    }
+    },
   });
+
+  app.import('node_modules/leaflet/dist/leaflet.css');
 
   return app.toTree();
 };
