@@ -5,36 +5,41 @@ class LeafletModifier extends Modifier {
   root = null;
 
   modify(element, positional, { component, props }) {
-    // TODO all of the following should be driven by the props coming in. This is just the basic example from leafletjs.com
-    // TODO not sure how this will react when props change, you may need to remove the map and re-add it?
-    const map = L.map(element).setView([51.505, -0.09], 13);
+    const map = L.map(element);
+
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
-    var marker = L.marker([51.5, -0.09]).addTo(map);
-    var circle = L.circle([51.508, -0.11], {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.5,
-      radius: 500,
-    }).addTo(map);
-    var polygon = L.polygon([
-      [51.509, -0.08],
-      [51.503, -0.06],
-      [51.51, -0.047],
-    ]).addTo(map);
-    marker.bindPopup('<b>Hello world!</b><br>I am a popup.').openPopup();
-    circle.bindPopup('I am a circle.');
-    polygon.bindPopup('I am a polygon.');
+
+
+    // NOTE (06/01/2026): `POINT` and `LINESTRING` are actually WKT types,
+    // ideally we should use Leaftlet's terminology here.
+    switch (props.type) {
+      case 'POINT':
+        const latlng = props.coordinates[0];
+        map.setView(latlng, 15);
+        L.marker(latlng).addTo(map);
+        break;
+      case 'LINESTRING':
+        const polyline = L.polyline(props.coordinates).addTo(map)
+        map.fitBounds(polyline.getBounds())
+        break;
+      case 'POLYGON':
+        const polygon = L.polygon(props.coordinates).addTo(map);
+        map.fitBounds(polygon.getBounds())
+        break;
+    default:
+      throw new Error('Encountered an unsupported type: ' + props.type)
+    }
+
   }
 }
 
 <template>
   <div
     {{LeafletModifier props=@props}}
-    {{! TODO should add proper styling }}
-    style="width: 300px; height: 200px; overflow: hidden;"
+    style="width: 600px; height: 400px; overflow: hidden;"
   ></div>
 </template>
