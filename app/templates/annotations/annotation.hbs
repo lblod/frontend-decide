@@ -49,10 +49,11 @@
     </tr>
     <tr>
       <td>Map</td>
-      <td>TODO</td>
+      <td style="vertical-align:top;">
+        <Leaflet @props={{@model.geometry.wgs84Coord}} />
+      </td>
     </tr>
   </:body>
 </AuTable>
 
-<Leaflet />
 {{outlet}}
