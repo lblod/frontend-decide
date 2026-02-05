@@ -7,32 +7,56 @@
     }}
     @homeRoute="index"
     @appTitle={{this.appTitle}}
-  />
+  >
+    <li class="au-c-list-horizontal__item">
+      {{#if this.session.isAuthenticated}}
+        <AuDropdown
+          @title={{this.currentSession.user.fullName}}
+          @buttonLabel="Account settings"
+          @alignment="right"
+          role="menu"
+        >
+          <AuLink @route="logout" @icon="logout" role="menuitem">
+            Afmelden
+          </AuLink>
+        </AuDropdown>
+      {{else}}
+        <LoginButton @isCompact={{true}} />
+      {{/if}}
+    </li>
+  </AuMainHeader>
   <AuMainContainer as |main|>
     <main.content>
-      <AuToolbar as |Group|>
-        <Group>
-          <AuButtonGroup>
-            {{#if this.session.isAuthenticated}}
-              <AuLink @route="dcat.datasets">Datasets</AuLink>
-              <AuLink @route="dcat.catalogs">Catalogs</AuLink>
-              <AuLink @route="annotations">Annotated data</AuLink>
-              <AuLink @route="receive-credential">Request VC</AuLink>
-            {{else}}
-              <AuLink @route="mock-login">Mock login</AuLink>
-              <AuLink @route="present-credential">Log in through VC</AuLink>
-            {{/if}}
-          </AuButtonGroup>
-        </Group>
-        {{#if this.session.isAuthenticated}}
-          <Group>
-            <AuButtonGroup>
-              <AuLink @route="logout" @skin="secondary">Log out</AuLink>
-            </AuButtonGroup>
-          </Group>
-        {{/if}}
-      </AuToolbar>
-      <AuBodyContainer class="au-u-padding">
+      {{#if this.session.isAuthenticated}}
+        <AuToolbar @border="bottom" @size="small" @skin="tint">
+          <nav
+            aria-label="breadcrumbs"
+            class="au-u-flex au-u-flex--between au-u-1-1"
+          >
+            <ol
+              class="au-c-list-horizontal au-c-list-horizontal--breadcrumbs au-u-margin-left-tiny"
+            >
+              <li class="au-c-list-horizontal__item">
+                <AuLink @route="dcat.datasets">Datasets</AuLink>
+              </li>
+              <li class="au-c-list-horizontal__item">
+                <AuLink @route="dcat.catalogs">Catalogs</AuLink>
+              </li>
+              <li class="au-c-list-horizontal__item">
+                <AuLink @route="annotations">Annotated data</AuLink>
+              </li>
+            </ol>
+            <ol
+              class="au-c-list-horizontal au-c-list-horizontal--breadcrumbs au-u-margin-right-tiny"
+            >
+              <li class="au-c-list-horizontal__item">
+                <AuLink @route="auth.registration">Request access</AuLink>
+              </li>
+            </ol>
+          </nav>
+        </AuToolbar>
+      {{/if}}
+      <AuBodyContainer>
         {{outlet}}
       </AuBodyContainer>
     </main.content>
