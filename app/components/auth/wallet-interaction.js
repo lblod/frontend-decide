@@ -53,9 +53,6 @@ export default class WalletInteractionComponent extends Component {
       data.credentialOfferUri ?? data.authorizationRequestUri ?? '';
     this.pin = data.pin ?? '';
     this.qrExpired = false;
-    if (this.statusObject.status === 'issued') {
-      this.router.transitionTo('index');
-    }
     this.startQrCountdown();
   }
 
@@ -94,6 +91,10 @@ export default class WalletInteractionComponent extends Component {
 
       if (status === 'accepted') {
         await this.session.authenticate('authenticator:oid4vc');
+      }
+
+      if (this.statusObject.status === 'issued') {
+        this.router.transitionTo('index');
       }
     }, 3000);
   }
