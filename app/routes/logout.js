@@ -9,7 +9,7 @@ export default class LogoutRoute extends Route {
     if (this.session.requireAuthentication(transition, 'login')) {
       try {
         await this.session.invalidate();
-        this.router.transitionTo('mock-login');
+        this.router.transitionTo('login');
       } catch (error) {
         throw new Error(
           'Something went wrong while trying to remove the session on the server',
