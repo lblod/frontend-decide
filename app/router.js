@@ -12,6 +12,7 @@ Router.map(function () {
     this.route('receive-credential');
     this.route('present-credential');
     this.route('registration');
+    this.route('callback');
   });
 
   this.route('mock-login');
