@@ -24,6 +24,26 @@
           <AuCard class="au-u-background-gray-200" @textCenter={{true}} as |c|>
             <c.header>
               <AuHeading @level="3" @skin="3">
+                Log in via ACM/IDM
+              </AuHeading>
+            </c.header>
+
+            <c.footer class="au-u-margin-top">
+              <AuLinkExternal
+                href={{this.loginUrl}}
+                @width="block"
+                @skin="button"
+              >
+                Login
+              </AuLinkExternal>
+            </c.footer>
+          </AuCard>
+        </div>
+
+        <div class="au-o-grid__item au-u-1-2@small">
+          <AuCard class="au-u-background-gray-200" @textCenter={{true}} as |c|>
+            <c.header>
+              <AuHeading @level="3" @skin="3">
                 Logging in for the first time?
               </AuHeading>
             </c.header>
