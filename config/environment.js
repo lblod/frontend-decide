@@ -18,6 +18,15 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+
+    acmidm: {
+      clientId: '{{OAUTH_API_KEY}}',
+      scope: '{{OAUTH_API_SCOPE}}',
+      baseUrl: '{{OAUTH_API_BASE_URL}}',
+      logoutUrl: '{{OAUTH_API_LOGOUT_URL}}',
+      redirectUrl: '{{OAUTH_API_REDIRECT_URL}}',
+      // switchRedirectUrl: '{{OAUTH_SWITCH_URL}}',
+    },
   };
 
   if (environment === 'development') {
