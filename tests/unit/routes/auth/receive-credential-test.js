@@ -5,7 +5,7 @@ module('Unit | Route | receive-credential', function (hooks) {
   setupTest(hooks);
 
   test('it exists', function (assert) {
-    let route = this.owner.lookup('route:receive-credential');
+    let route = this.owner.lookup('route:auth/receive-credential');
     assert.ok(route);
   });
 });

@@ -4,6 +4,7 @@ import L from 'leaflet';
 class LeafletModifier extends Modifier {
   root = null;
 
+  /*eslint no-unused-vars: ["error", { "argsIgnorePattern": "component" }]*/
   modify(element, positional, { component, props }) {
     const map = L.map(element);
 
@@ -17,19 +18,22 @@ class LeafletModifier extends Modifier {
     // NOTE (06/01/2026): `POINT` and `LINESTRING` are actually WKT types,
     // ideally we should use Leaftlet's terminology here.
     switch (props.type) {
-      case 'POINT':
+      case 'POINT': {
         const latlng = props.coordinates[0];
         map.setView(latlng, 15);
         L.marker(latlng).addTo(map);
         break;
-      case 'LINESTRING':
+      }
+      case 'LINESTRING': {
         const polyline = L.polyline(props.coordinates).addTo(map)
         map.fitBounds(polyline.getBounds())
         break;
-      case 'POLYGON':
+      }
+      case 'POLYGON': {
         const polygon = L.polygon(props.coordinates).addTo(map);
         map.fitBounds(polygon.getBounds())
         break;
+      }
     default:
       throw new Error('Encountered an unsupported type: ' + props.type)
     }
@@ -38,8 +42,7 @@ class LeafletModifier extends Modifier {
 }
 
 <template>
-  <div
+  <div class="map-container"
     {{LeafletModifier props=@props}}
-    style="width: 600px; height: 400px; overflow: hidden;"
   ></div>
 </template>
