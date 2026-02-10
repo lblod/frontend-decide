@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import ENV from 'frontend-decide/config/environment';
 
 export default class LogoutRoute extends Route {
   @service router;
@@ -8,8 +9,13 @@ export default class LogoutRoute extends Route {
   async beforeModel(transition) {
     if (this.session.requireAuthentication(transition, 'login')) {
       try {
+        let wasMockLoginSession = this.session.isMockLoginSession;
         await this.session.invalidate();
-        this.router.transitionTo('login');
+        let logoutUrl = wasMockLoginSession
+          ? this.router.urlFor('mock-login')
+          : ENV.acmidm.logoutUrl;
+
+        window.location.replace(logoutUrl);
       } catch (error) {
         throw new Error(
           'Something went wrong while trying to remove the session on the server',
