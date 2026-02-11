@@ -2,10 +2,13 @@
   "name": "frontend-decide",
   "version": "0.0.1",
   "private": true,
-  "description": "Small description for frontend-decide goes here",
-  "repository": "",
+  "description": "Frontend for the DECIDe app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lblod/frontend-decide.git"
+  },
   "license": "MIT",
-  "author": "",
+  "author": "redpencil.io",
   "directories": {
     "doc": "doc",
     "test": "tests"
