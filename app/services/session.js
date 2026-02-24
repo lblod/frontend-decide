@@ -5,9 +5,9 @@ export default class DecideSessionService extends SessionService {
   @service currentSession;
   @service router;
 
-  get isMockLoginSession() {
+  get isAcmIdmSession() {
     return this.isAuthenticated
-      ? this.data.authenticated.authenticator.includes('mock-login')
+      ? this.data.authenticated.authenticator.includes('acm-idm')
       : false;
   }
 
