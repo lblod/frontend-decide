@@ -9,11 +9,11 @@ export default class LogoutRoute extends Route {
   async beforeModel(transition) {
     if (this.session.requireAuthentication(transition, 'login')) {
       try {
-        let wasMockLoginSession = this.session.isMockLoginSession;
+        let wasAcmIdmSession = this.session.isAcmIdmSession;
         await this.session.invalidate();
-        let logoutUrl = wasMockLoginSession
-          ? this.router.urlFor('mock-login')
-          : ENV.acmidm.logoutUrl;
+        let logoutUrl = wasAcmIdmSession
+          ? ENV.acmidm.logoutUrl
+          : this.router.urlFor('index');
 
         window.location.replace(logoutUrl);
       } catch (error) {

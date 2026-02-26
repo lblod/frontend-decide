@@ -13,11 +13,13 @@ Router.map(function () {
     this.route('present-credential');
     this.route('registration');
     this.route('callback');
+    this.route('buy-access');
   });
 
   this.route('mock-login');
   this.route('login');
   this.route('logout');
+  this.route('sparql');
 
   this.route('dcat', function () {
     this.route('distributions.distribution', {

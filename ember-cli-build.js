@@ -24,6 +24,7 @@ module.exports = function (defaults) {
   });
 
   app.import('node_modules/leaflet/dist/leaflet.css');
+  app.import('node_modules/@triply/yasgui/build/yasgui.min.css');
 
   return app.toTree();
 };

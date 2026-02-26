@@ -1,4 +1,4 @@
-{{page-title "VC login"}}
+{{page-title "Restricted dataset"}}
 
 <section class="au-o-region-large au-u-min-height-full au-u-overflow-auto">
   <div class="au-u-flex au-u-flex--center au-u-height-full">
@@ -24,14 +24,14 @@
           <AuCard class="au-u-background-gray-200" @textCenter={{true}} as |c|>
             <c.header>
               <AuHeading @level="3" @skin="3">
-                Logging in for the first time?
+                Need to buy access?
               </AuHeading>
             </c.header>
 
             <c.content
               class="au-u-flex au-u-flex--vertical-center au-u-flex--center au-u-flex--column"
             >
-              <p>Request a verifiable credential.</p>
+              <p>Buy a verifiable credential.</p>
               <div
                 class="au-u-height-full au-u-flex au-u-flex--vertical-center au-u-flex--center"
               >
@@ -44,9 +44,15 @@
             </c.content>
 
             <c.footer class="au-u-margin-top">
-              <AuLink @route="auth.registration" @width="block" @skin="button">
-                Request access
-              </AuLink>
+              <MockLogin as |login|>
+              <AuButton
+                @width="block"
+                @skin="button"
+                {{on "click" (fn this.buyAccess login.login)}}
+              >
+                Buy access
+              </AuButton>
+              </MockLogin>
             </c.footer>
           </AuCard>
         </div>
@@ -82,27 +88,6 @@
               >
                 Scan QR code
               </AuLink>
-            </c.footer>
-          </AuCard>
-        </div>
-
-        <div class="au-o-grid__item au-u-1-2@small">
-          <AuCard class="au-u-background-gray-200" @textCenter={{true}} as |c|>
-            <c.header>
-              <AuHeading @level="3" @skin="3">
-                Log in via ACM/IDM
-              </AuHeading>
-            </c.header>
-
-            <c.footer class="au-u-margin-top">
-              <AuLinkExternal
-                href={{this.loginUrl}}
-                @width="block"
-                @skin="button"
-                @newTab={{false}}
-              >
-                Login
-              </AuLinkExternal>
             </c.footer>
           </AuCard>
         </div>
